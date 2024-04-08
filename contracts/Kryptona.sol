@@ -17,6 +17,7 @@ contract Kryptona {
 
     // Transfer Event
     event Transfer(address indexed _from, address indexed _to, uint256 _value);
+    event Mint(address indexed _to, uint256 _value);
 
     constructor() {
         balances[msg.sender] = totalSupply;
@@ -38,6 +39,22 @@ contract Kryptona {
         balances[to] += amount;
 
         emit Transfer(msg.sender, to, amount);
+    }
+
+    function mint(uint256 amount) external {
+        // Increase the total supply
+        totalSupply += amount;
+
+        // Increase the caller's balance
+        balances[msg.sender] += amount;
+
+        console.log(
+            "Minting %s tokens to %s",
+            amount,
+            msg.sender
+        );
+
+        emit Mint(msg.sender, amount);
     }
 
     function balanceOf(address account) external view returns (uint256) {

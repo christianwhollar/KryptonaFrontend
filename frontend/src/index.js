@@ -19,10 +19,12 @@ const Banner = ({ walletAddress, handleConnectWallet }) => {
     <div className="banner">
       <img src="/logo.png" alt="Logo" className="logo" />
       <span className="title">Kryptona</span>
+      <div className="nav-links">
       <a href="/">Home</a>
       <a href="/apply">Apply</a>
       <a href="/vote">Vote</a>
       <a href="/help">Help</a>
+      </div>
       <button onClick={handleConnectWallet} className="wallet-button">
         {walletAddress ? `Wallet Connected: ${displayAddress}` : 'Connect Wallet'}
       </button>
@@ -32,7 +34,7 @@ const Banner = ({ walletAddress, handleConnectWallet }) => {
 
 const App = () => {
   const [walletAddress, setWalletAddress] = useState(localStorage.getItem('walletAddress'));
-
+  
   const handleConnectWallet = async () => {
     if (window.ethereum) {
       const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -50,7 +52,7 @@ const App = () => {
         console.error('User rejected connection', error);
       }
     } else {
-      console.log('Please install MetaMask!');
+      console.error('No Ethereum provider found');
     }
   };
 

@@ -23,7 +23,7 @@ async function main() {
   const kryptona = await Kryptona.deploy();
   await kryptona.deployed();
 
-  console.log("Token address:", kryptona.address);
+  console.log("Kryptona Address:", kryptona.address);
 
   saveFrontendFiles(kryptona);
 }

@@ -20,6 +20,11 @@ body {
   color: white;
   text-decoration: none;
   margin-right: 20px; /* Add this line */
+  margin-left: 30px; /* New left margin */
+}
+
+.nav-links {
+  margin-left: 200px; /* Adjust as needed */
 }
 
 .banner button.wallet-button {
@@ -31,6 +36,7 @@ body {
   font-weight: bold; /* Add this line */
   margin-left: auto; /* Add this to move the button to the right */
   border-radius: 20px; /* Add this line */
+  width: 400px; /* Adjust as needed */
 }
 
 .logo {
