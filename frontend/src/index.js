@@ -1,17 +1,71 @@
 import React from "react";
-import ReactDOM from "react-dom/client";
+import { createRoot } from "react-dom/client";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { Dapp } from "./components/Dapp";
-
-// We import bootstrap here, but you can remove if you want
+import Help from "./pages/Help";
+import Apply from "./pages/Apply";
+import Vote from "./pages/Vote";
 import "bootstrap/dist/css/bootstrap.css";
+import { useState } from 'react';
+import { ethers } from 'ethers';
+import './App.css';
 
-// This is the entry point of your application, but it just renders the Dapp
-// react component. All of the logic is contained in it.
+const Banner = ({ walletAddress, handleConnectWallet }) => {
+  const displayAddress = walletAddress 
+    ? `${walletAddress.slice(0, 4)}...${walletAddress.slice(-3)}` 
+    : 'Connect Wallet';
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
+  return (
+    <div className="banner">
+      <img src="/logo.png" alt="Logo" className="logo" />
+      <span className="title">Kryptona</span>
+      <a href="/">Home</a>
+      <a href="/apply">Apply</a>
+      <a href="/vote">Vote</a>
+      <a href="/help">Help</a>
+      <button onClick={handleConnectWallet} className="wallet-button">
+        {walletAddress ? `Wallet Connected: ${displayAddress}` : 'Connect Wallet'}
+      </button>
+    </div>
+  );
+};
 
-root.render(
-  <React.StrictMode>
-    <Dapp />
-  </React.StrictMode>
-);
+const App = () => {
+  const [walletAddress, setWalletAddress] = useState(localStorage.getItem('walletAddress'));
+
+  const handleConnectWallet = async () => {
+    if (window.ethereum) {
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      try {
+        await provider.send('eth_requestAccounts', []);
+        const accounts = await provider.listAccounts();
+        if (accounts.length > 0) {
+          setWalletAddress(accounts[0]);
+          localStorage.setItem('walletAddress', accounts[0]);
+          console.log('Wallet connected! Address:', accounts[0]);
+        } else {
+          console.error('No accounts found');
+        }
+      } catch (error) {
+        console.error('User rejected connection', error);
+      }
+    } else {
+      console.log('Please install MetaMask!');
+    }
+  };
+
+  return (
+    <Router>
+      <Banner walletAddress={walletAddress} handleConnectWallet={handleConnectWallet} />
+      <Routes>
+        <Route path="/" element={<Dapp />} />
+        <Route path="/apply" element={<Apply />} />
+        <Route path="/vote" element={<Vote />} />
+        <Route path="/help" element={<Help />} />
+      </Routes>
+    </Router>
+  );
+};
+
+const root = document.getElementById('root');
+createRoot(root).render(<App />);

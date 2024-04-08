@@ -1,9 +1,6 @@
 const fs = require("fs");
 
-// This file is only here to make interacting with the Dapp easier,
-// feel free to ignore it if you don't need it.
-
-task("faucet", "Sends ETH and tokens to an address")
+task("faucet", "Sends ETH and Kryptona to an address")
   .addPositionalParam("receiver", "The address that will receive them")
   .setAction(async ({ receiver }, { ethers }) => {
     if (network.name === "hardhat") {
@@ -25,15 +22,15 @@ task("faucet", "Sends ETH and tokens to an address")
     const addressJson = fs.readFileSync(addressesFile);
     const address = JSON.parse(addressJson);
 
-    if ((await ethers.provider.getCode(address.Token)) === "0x") {
+    if ((await ethers.provider.getCode(address.Kryptona)) === "0x") {
       console.error("You need to deploy your contract first");
       return;
     }
 
-    const token = await ethers.getContractAt("Token", address.Token);
+    const kryptona = await ethers.getContractAt("Kryptona", address.Kryptona);
     const [sender] = await ethers.getSigners();
 
-    const tx = await token.transfer(receiver, 100);
+    const tx = await kryptona.transfer(receiver, 100);
     await tx.wait();
 
     const tx2 = await sender.sendTransaction({
@@ -42,5 +39,5 @@ task("faucet", "Sends ETH and tokens to an address")
     });
     await tx2.wait();
 
-    console.log(`Transferred 1 ETH and 100 tokens to ${receiver}`);
+    console.log(`Transferred 1 ETH and 100 Kryptona to ${receiver}`);
   });

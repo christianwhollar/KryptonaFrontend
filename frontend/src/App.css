@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+
+body {
+  background-color: #9370DB; /* Lighter purple */
+}
+
+.banner {
+  background-color: #4B0082; /* Lex Luthor purple */
+  padding: 10px;
+  display: flex;
+  justify-content: space-between; /* Change this to space-between */
+  align-items: center;
+  color: white;
+  font-size: 20px;
+  font-family: 'Orbitron', sans-serif;
+  font-weight: bold; /* Add this line */
+}
+
+.banner a {
+  color: white;
+  text-decoration: none;
+  margin-right: 20px; /* Add this line */
+}
+
+.banner button.wallet-button {
+  background-color: #32CD32; /* Lex Luthor green */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 20px;
+  font-weight: bold; /* Add this line */
+  margin-left: auto; /* Add this to move the button to the right */
+  border-radius: 20px; /* Add this line */
+}
+
+.logo {
+  height: 70px; /* Adjust as needed */
+  margin-right: 10px; /* Adjust as needed */
+}
+
+.title {
+  margin-right: auto; /* Add this to move the title to the left */
+}
