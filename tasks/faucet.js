@@ -12,7 +12,7 @@ task("faucet", "Sends ETH and Kryptona to an address")
     }
 
     const addressesFile =
-      __dirname + "/../frontend/src/contracts/contract-address.json";
+      __dirname + "/../frontend/src/contracts/kryptona-contract-address.json";
 
     if (!fs.existsSync(addressesFile)) {
       console.error("You need to deploy your contract first");
@@ -22,12 +22,12 @@ task("faucet", "Sends ETH and Kryptona to an address")
     const addressJson = fs.readFileSync(addressesFile);
     const address = JSON.parse(addressJson);
 
-    if ((await ethers.provider.getCode(address.Kryptona)) === "0x") {
+    if ((await ethers.provider.getCode(address.kryptona)) === "0x") {
       console.error("You need to deploy your contract first");
       return;
     }
 
-    const kryptona = await ethers.getContractAt("Kryptona", address.Kryptona);
+    const kryptona = await ethers.getContractAt("Kryptona", address.kryptona);
     const [sender] = await ethers.getSigners();
 
     amount = 100n * 10n ** 18n;

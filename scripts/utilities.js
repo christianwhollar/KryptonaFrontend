@@ -24,6 +24,18 @@ function saveFrontendFiles(contract, contractName) {
   );
 }
 
+function getKryptonaContractAddress() {
+  const contractAddress = require("../frontend/src/contracts/kryptona-contract-address.json");
+  return contractAddress.kryptona;
+}
+
+function getDAOKryptonaTreasuryContractAddress() {
+  const contractAddress = require("../frontend/src/contracts/daokryptonatreasury-contract-address.json");
+  return contractAddress.daokryptonatreasury;
+}
+
 module.exports = {
   saveFrontendFiles,
+  getKryptonaContractAddress,
+  getDAOKryptonaTreasuryContractAddress
 };

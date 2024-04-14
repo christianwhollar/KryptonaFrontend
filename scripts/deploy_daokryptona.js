@@ -1,4 +1,4 @@
-const { saveFrontendFiles, getKryptonaContractAddress } = require('./utilities');
+const { saveFrontendFiles, getKryptonaContractAddress, getDAOKryptonaTreasuryContractAddress } = require('./utilities');
 
 async function main() {
   if (network.name === "hardhat") {
@@ -17,16 +17,17 @@ async function main() {
   );
 
   const kryptonaContractAddress = getKryptonaContractAddress();
+  const daoKryptonaTreasuryContractAddress = getDAOKryptonaTreasuryContractAddress();
 
-  const DAOKryptonaTreasury = await ethers.getContractFactory("DAOKryptonaTreasury");
-  const daoKryptonaTreasury = await DAOKryptonaTreasury.deploy(kryptonaContractAddress);
+  const DAOKryptona = await ethers.getContractFactory("DAOKryptona");
+  const daoKryptona = await DAOKryptona.deploy(kryptonaContractAddress, daoKryptonaTreasuryContractAddress);
 
-  await daoKryptonaTreasury.deployed();
+  await daoKryptona.deployed();
 
-  console.log("DAO Kryptona Treasury Address:", daoKryptonaTreasury.address);
+  console.log("DAO Treasury Address:", daoKryptona.address);
 
   // Save the contract address and ABI for the frontend
-  saveFrontendFiles(daoKryptonaTreasury, "DAOKryptonaTreasury");
+  saveFrontendFiles(daoKryptona, "DAOKryptona");
 }
 
 main()
