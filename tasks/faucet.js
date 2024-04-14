@@ -30,7 +30,9 @@ task("faucet", "Sends ETH and Kryptona to an address")
     const kryptona = await ethers.getContractAt("Kryptona", address.Kryptona);
     const [sender] = await ethers.getSigners();
 
-    const tx = await kryptona.transfer(receiver, 100);
+    amount = 100n * 10n ** 18n;
+
+    const tx = await kryptona.transfer(receiver, amount);
     await tx.wait();
 
     const tx2 = await sender.sendTransaction({

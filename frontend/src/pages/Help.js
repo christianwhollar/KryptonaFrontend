@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { ethers } from 'ethers';
 import kryptonaAbi from '../contracts/Kryptona.json'; // Path to the contract ABI
-import contractAddress from '../contracts/contract-address.json'; // Path to the contract address
+import contractAddress from '../contracts/kryptona-contract-address.json'; // Path to the contract address
 import { useWallet } from '../WalletContext';
 import './Help.css';
 
@@ -57,7 +57,7 @@ const Help = () => {
     if (kryptonaContract && walletConnected) {
       try {
         console.log(walletAddress)
-        const balance = await kryptonaContract.balanceOf(walletAddress);
+        const balance = await kryptonaContract.balanceOf(walletAddress) / 10**18;
         setKryptonaBalance(balance.toString());
         setBalanceFetched(true);
         console.log('Token Balanced Retrieved');

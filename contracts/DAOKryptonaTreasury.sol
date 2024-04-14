@@ -17,7 +17,7 @@ contract DAOKryptonaTreasury is Ownable {
      * @dev Constructor initializes the treasury with the Kryptona token contract address.
      * @param _kryptonaTokenAddress Address of the Kryptona token contract.
      */
-    constructor(address _kryptonaTokenAddress) Ownable(msg.sender) {
+    constructor(address _kryptonaTokenAddress) Ownable() {
         kryptonaToken = ERC20(_kryptonaTokenAddress);
     }
 

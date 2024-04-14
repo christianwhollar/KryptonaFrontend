@@ -1,11 +1,11 @@
-const path = require("path");
+const { saveFrontendFiles } = require('./utilities');
 
 async function main() {
   // This is just a convenience check
   if (network.name === "hardhat") {
     console.warn(
       "You are trying to deploy a contract to the Hardhat Network, which" +
-        "gets automatically created and destroyed every time. Use the Hardhat" +
+        " gets automatically created and destroyed every time. Use the Hardhat" +
         " option '--network localhost'"
     );
   }
@@ -19,34 +19,18 @@ async function main() {
 
   console.log("Account balance:", (await deployer.getBalance()).toString());
 
+  // Define the initial supply for the Kryptona token
+  const initialSupply = 1000000n * 10n ** 18n;
+
+  // Deploy the Kryptona contract
   const Kryptona = await ethers.getContractFactory("Kryptona");
-  const kryptona = await Kryptona.deploy();
+  const kryptona = await Kryptona.deploy(initialSupply);
   await kryptona.deployed();
 
   console.log("Kryptona Address:", kryptona.address);
 
-  saveFrontendFiles(kryptona);
-}
-
-function saveFrontendFiles(kryptona) {
-  const fs = require("fs");
-  const contractsDir = path.join(__dirname, "..", "frontend", "src", "contracts");
-
-  if (!fs.existsSync(contractsDir)) {
-    fs.mkdirSync(contractsDir);
-  }
-
-  fs.writeFileSync(
-    path.join(contractsDir, "contract-address.json"),
-    JSON.stringify({ Kryptona: kryptona.address }, undefined, 2)
-  );
-
-  const KryptonaArtifact = artifacts.readArtifactSync("Kryptona");
-
-  fs.writeFileSync(
-    path.join(contractsDir, "Kryptona.json"),
-    JSON.stringify(KryptonaArtifact, null, 2)
-  );
+  // Save the contract address and ABI for the frontend
+  saveFrontendFiles(kryptona, "Kryptona");
 }
 
 main()
