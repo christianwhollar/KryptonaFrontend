@@ -25,7 +25,7 @@
 
 .help-content {
   border: 5px solid #4B0082;
-  width: 1100px;
+  width: 1200px;
 }
 
 .help-button-container {
@@ -48,8 +48,39 @@
   font-family: 'Orbitron', sans-serif;
   font-weight: bold;
   align-items: center;
-  width: 400px;
+  width: 500px;
   text-align: center;
+  margin-bottom: 10px;
+}
+
+.help-vote-approve-button {
+  padding: 10px;
+  background-color: #32CD32;
+  color: #F5F5F5;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: 'Orbitron', sans-serif;
+  font-weight: bold;
+  width: 300px;
+  text-align: center;
+  margin-left:225px;
+  margin-bottom: 10px;
+}
+
+.help-vote-deny-button {
+  padding: 10px;
+  background-color: #32CD32;
+  color: #F5F5F5;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: 'Orbitron', sans-serif;
+  font-weight: bold;
+  align-items: right;
+  width: 300px;
+  text-align: center;
+  margin-left: 75px;
   margin-bottom: 10px;
 }
 
@@ -74,4 +105,14 @@
   margin-left: 10px;
   margin-top: 10px;
   margin-right: 10px;
+}
+
+.help-input {
+  margin: 0;
+  padding: 0;
+  width: 790px;
+  margin-top: 11px;
+  margin-right:10px;
+  font-family: 'Orbitron', sans-serif;
+  font-weight: bold;
 }

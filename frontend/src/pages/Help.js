@@ -7,6 +7,9 @@ import kryptonaContractAddress from '../contracts/kryptona-contract-address.json
 import kryptonaDAOAbi from '../contracts/daokryptona.json'; // Path to the contract ABI
 import kryptonaDAOContractAddress from '../contracts/daokryptona-contract-address.json'; // Path to the contract address
 
+import proposalKryptonaMemberAbi from '../contracts/proposalkryptonamember.json'; // Path to the contract ABI
+import proposalKryptonaMemberContractAddress from '../contracts/proposalkryptonamember-contract-address.json'; // Path to the contract address
+
 import { useWallet } from '../WalletContext';
 import './Help.css';
 
@@ -16,9 +19,11 @@ const Help = () => {
 
   const [kryptonaContract, setKryptonaContract] = useState(null);
   const [kryptonaDAOContract, setKryptonaDAOContract] = useState(null);
+  const [proposalKryptonaMemberContract, setProposalKrytonaMemberContract] = useState(false);
 
   const [kryptonaContractFetched, setKryptonaContractFetched] = useState(false);
   const [kryptonaDAOContractFetched, setKryptonaDAOContractFetched] = useState(false);
+  const [proposalKrytonaMemberContractFetched, setProposalKrytonaMemberContractFetched] = useState(false);
 
   const [tokenDataFetched, setTokenDataFetched] = useState(false);
   const [tokenData, setTokenData] = useState({ name: '', symbol: '' });
@@ -29,6 +34,16 @@ const Help = () => {
   const [statusElevated, setStatusElevated] = useState(false);
   const [memberStatus, setKryptonaMemberStatus] = useState(false);
 
+  const [proposalKryptonaNewMemberAddress, setPropoosalKryptonaNewMemberAddress] = useState(' Enter the address of the wallet to be added to the Kryptona DAO.');
+  const [newAddressSet, setNewAddressSet] = useState(false);
+
+  const handleNewMemberInputAddressChange = (event) => {
+    setPropoosalKryptonaNewMemberAddress(event.target.value);
+    setNewAddressSet(true);
+  };
+
+  const [proposalKryptonaMemberProposalCreated, setKryptonaMemberProposalCreated] = useState(false);
+  
   const getKryptonaContract = async () => {
     if (walletAddress) {
     console.log('Fetching contract...')
@@ -95,7 +110,6 @@ const Help = () => {
         provider.getSigner(0)
       );
       setKryptonaDAOContract(contract);
-      setWalletConnected(true);
       setKryptonaDAOContractFetched(true);
       console.log('Contract Fetched')
   } else {
@@ -126,6 +140,74 @@ const Help = () => {
       console.error('Kryptona DAO contract not fetched');
     }
   }
+
+  const getProposalKryptonaMemberContract = async () => {
+    if (walletAddress) {
+      console.log('Fetching contract...')
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      const contract = new ethers.Contract(
+        proposalKryptonaMemberContractAddress.proposalkryptonamember,
+        proposalKryptonaMemberAbi.abi,
+        provider.getSigner(0)
+      );
+      setProposalKrytonaMemberContract(contract);
+      setProposalKrytonaMemberContractFetched(true);
+      console.log('Contract Fetched')
+  } else {
+    console.error('Wallet not connected');
+  }
+  };
+
+  const createProposalKryptonaMember = async () => {
+    if (proposalKryptonaMemberContract && walletAddress) {
+      console.log('Voting on proposal...')
+      try {
+        await proposalKryptonaMemberContract.createMemberProposal(proposalKryptonaNewMemberAddress, 0);
+        setKryptonaMemberProposalCreated(true);
+        console.log('Member Proposal Created');
+      } catch (error) {
+        console.error('Error creating member proposal:', error);
+      }
+    } else if (!walletAddress) {
+      console.error('Wallet not connected');
+    } else if (!proposalKryptonaMemberContract) {
+      console.error('Kryptona Member Proposal contract not fetched');
+    }
+  };
+
+  const voteProposalKryptonaMember = async (voteBoolean) => {
+    if (proposalKryptonaMemberContract && walletAddress) {
+      console.log('Voting on proposal...')
+      try {
+        const proposalId = await proposalKryptonaMemberContract.nextProposalId() - 1n;
+        await proposalKryptonaMemberContract.vote(proposalId, voteBoolean);
+        console.log('Proposal Voted');
+      } catch (error) {
+        console.error('Error voting on proposal:', error);
+      }
+    } else if (!walletAddress) {
+      console.error('Wallet not connected');
+    } else if (!proposalKryptonaMemberContract) {
+      console.error('Kryptona Member Proposal contract not fetched');
+    }
+  };
+
+  const executeProposalKryptonaMember = async () => {
+    if (proposalKryptonaMemberContract && walletAddress) {
+      console.log('Executing proposal...')
+      try {
+        const proposalId = await proposalKryptonaMemberContract.nextProposalId() - 1n;
+        await proposalKryptonaMemberContract.executeProposal(proposalId);
+        console.log('Proposal Executed');
+      } catch (error) {
+        console.error('Error executing on proposal:', error);
+      }
+    } else if (!walletAddress) {
+      console.error('Wallet not connected');
+    } else if (!proposalKryptonaMemberContract) {
+      console.error('Kryptona Member Proposal contract not fetched');
+    }
+  };
 
   return (
   <div className="help-container">
@@ -206,11 +288,69 @@ const Help = () => {
         </p>
       </div>
     </div>
-    <h2 className="help-subtitle">Kryptona Proposal</h2>
+    <h2 className="help-subtitle">Kryptona Member Proposal</h2>
     <div className='help-content'>
-    <div className="help-button-container">
+      <div className="help-button-container">
+      <button className="help-button" onClick={getProposalKryptonaMemberContract}>
+          Fetch Kryptona Member Proposal Contract
+        </button>
+        {proposalKrytonaMemberContractFetched ? (
+          <span className="help-checkmark">✔️</span>
+        ) : (
+          <span className="help-cross">❌</span>
+        )}
+        <p
+          className="help-paragraph"
+          onClick={() => navigator.clipboard.writeText(proposalKryptonaMemberContractAddress.proposalkryptonamember)}
+        >
+          Contract Address: {proposalKryptonaMemberContractAddress.proposalkryptonamember}
+        </p>
       </div>
+      <div className="help-button-container">
+      <button className="help-button" onClick={setPropoosalKryptonaNewMemberAddress}>
+          Set New Kryptona Member Address
+        </button>
+        {newAddressSet ? (
+          <span className="help-checkmark">✔️</span>
+        ) : (
+          <span className="help-cross">❌</span>
+        )}
+        <input
+          className="help-input"
+          value={proposalKryptonaNewMemberAddress}
+          onChange={handleNewMemberInputAddressChange}
+        />
       </div>
+      <div className="help-button-container">
+      <button className="help-button" onClick={createProposalKryptonaMember}>
+          Propose New Kryptona Member
+        </button>
+        {proposalKryptonaMemberProposalCreated ? (
+          <span className="help-checkmark">✔️</span>
+        ) : (
+          <span className="help-cross">❌</span>
+        )}
+        <p className="help-paragraph">
+          {proposalKryptonaMemberProposalCreated === true ? 'Member Proposal Created' : 'Error Creating Member Proposal'}
+        </p>
+      </div>
+      <div className="help-button-container">
+        <button className="help-vote-approve-button" onClick={() => voteProposalKryptonaMember(true)}>
+          Vote on Proposal (Approve)
+        </button>
+        <button className="help-vote-deny-button" onClick={() => voteProposalKryptonaMember(false)}>
+          Vote on Proposal (Deny)
+        </button>
+        </div>
+    </div>
+    <h2 className="help-subtitle">Kryptona Treasury Proposal</h2>
+    <div className='help-content'>
+      hi
+    </div>
+    <h2 className="help-subtitle">Kryptona Child DAO Proposal</h2>
+    <div className='help-content'>
+      hi
+    </div>
   </div>
   );
 };
