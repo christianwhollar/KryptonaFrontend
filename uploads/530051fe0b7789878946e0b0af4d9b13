@@ -1,0 +1,27 @@
+import argparse
+import os.path
+import pickle
+import pandas as pd
+from sklearn.linear_model import LinearRegression
+
+
+def process_data(input_path: str, output_path: str):
+    df = pd.read_csv(input_path)
+    X = df.drop("Weekly_Sales", axis=1)
+    y = df["Weekly_Sales"]
+    model = LinearRegression()
+    model.fit(X, y)
+
+    os.makedirs(os.path.dirname(output_path), exist_ok=True)
+
+    with open(output_path, 'wb') as f:
+        pickle.dump(model, f)
+
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--input_path', help='the path of data file')
+    parser.add_argument('--output_path', help='the path of data file')
+    args = parser.parse_args()
+
+    process_data(input_path=args.input_path, output_path=args.output_path)
