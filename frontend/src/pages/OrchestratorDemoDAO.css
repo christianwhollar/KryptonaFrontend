@@ -1,0 +1,45 @@
+/* Orchestrator Demo DAO Page Container */
+.orchestrator-demo-dao-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .orchestrator-demo-dao-subtitle {
+      margin-top: 20px;
+      margin-bottom: 20px;
+      color: #FFD700; /* Gold color */
+      font-family: 'Orbitron', sans-serif;
+      font-weight: bold;
+  }
+  
+  /* File Upload Section */
+  .orchestrator-demo-dao-file-upload {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 20px;
+    border: 2px solid #800080; /* Dark purple border */
+    padding: 10px;
+    border-radius: 5px;
+  }
+  
+  .orchestrator-demo-dao-file-upload label {
+    margin-right: 10px;
+    color: #FFD700; /* Gold color */
+  }
+  
+  .orchestrator-demo-dao-file-upload input[type="file"] {
+    margin-right: 10px;
+  }
+  
+  .orchestrator-demo-dao-file-upload button {
+    padding: 10px;
+    background-color: #32CD32;
+    color: #F5F5F5;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: bold;
+  }

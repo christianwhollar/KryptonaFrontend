@@ -6,6 +6,7 @@ import Explore from "./pages/Explore";
 import Apply from "./pages/Apply";
 import Vote from "./pages/Vote";
 import Help from "./pages/Help";
+import OrchestratorDemoDAO from "./pages/OrchestratorDemoDAO";
 import "bootstrap/dist/css/bootstrap.css";
 import './App.css';
 import { WalletProvider, useWallet } from './WalletContext';
@@ -22,6 +23,7 @@ const App = () => {
         <Route path="/explore" element={<Explore />} />
         <Route path="/vote" element={<Vote />} />
         <Route path="/help" element={<Help />} />
+        <Route path="/orchestrator-demo-dao" element={<OrchestratorDemoDAO />} />
       </Routes>
     </Router>
   );

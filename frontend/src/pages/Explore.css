@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+
+.orchestrator-demo-dao-container {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.orchestrator-demo-dao-subtitle {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    color: #FFD700;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: bold;
+  }
+
+.orchestrator-demo-dao-content {
+  border: 5px solid #4B0082;
+  width: 800px;
+}
+
+.orchestrator-demo-dao-button-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin-top: 20px;
+  margin-left: 20px;
+  margin-bottom: 20px;
+}
+
+.orchestrator-demo-dao-button {
+  padding: 10px;
+  background-color: #32CD32;
+  color: #F5F5F5;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: 'Orbitron', sans-serif;
+  font-weight: bold;
+  align-items: center;
+  width: 250px;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+
+.orchestrator-demo-dao-paragraph {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: bold;
+  color: #FFD700;
+  margin: 0;
+  padding: 0;
+  width: 800px;
+  margin-top: 11px;
+}
