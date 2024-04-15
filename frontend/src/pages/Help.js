@@ -42,6 +42,8 @@ const Help = () => {
     setNewAddressSet(true);
   };
 
+  const [proposalKryptonaMemberExecuted, setProposalKryptonaMemberExecuted] = useState(false);
+
   const [proposalKryptonaMemberProposalCreated, setKryptonaMemberProposalCreated] = useState(false);
   
   const getKryptonaContract = async () => {
@@ -125,7 +127,7 @@ const Help = () => {
           await kryptonaDAOContract.adminAddMember(walletAddress);
         } catch (error) {
           console.log('Address is already a member:', error);
-        }        console.log('hi')
+        }
         const memberStatus = await kryptonaDAOContract.checkMembership(walletAddress);
         console.log(memberStatus)
         setKryptonaMemberStatus(memberStatus.toString());
@@ -179,7 +181,7 @@ const Help = () => {
     if (proposalKryptonaMemberContract && walletAddress) {
       console.log('Voting on proposal...')
       try {
-        const proposalId = await proposalKryptonaMemberContract.nextProposalId() - 1n;
+        const proposalId = await proposalKryptonaMemberContract.nextProposalId();
         await proposalKryptonaMemberContract.vote(proposalId, voteBoolean);
         console.log('Proposal Voted');
       } catch (error) {
@@ -196,8 +198,9 @@ const Help = () => {
     if (proposalKryptonaMemberContract && walletAddress) {
       console.log('Executing proposal...')
       try {
-        const proposalId = await proposalKryptonaMemberContract.nextProposalId() - 1n;
-        await proposalKryptonaMemberContract.executeProposal(proposalId);
+        const proposalId = await proposalKryptonaMemberContract.nextProposalId() ;
+        await proposalKryptonaMemberContract.connect(walletAddress).executeProposal(proposalId);
+        setProposalKryptonaMemberExecuted(true);
         console.log('Proposal Executed');
       } catch (error) {
         console.error('Error executing on proposal:', error);
@@ -341,7 +344,20 @@ const Help = () => {
         <button className="help-vote-deny-button" onClick={() => voteProposalKryptonaMember(false)}>
           Vote on Proposal (Deny)
         </button>
-        </div>
+      </div>
+      <div className="help-button-container">
+        <button className="help-button" onClick={executeProposalKryptonaMember}>
+          Execute Proposal
+        </button>
+        {proposalKryptonaMemberExecuted ? (
+          <span className="help-checkmark">✔️</span>
+        ) : (
+          <span className="help-cross">❌</span>
+        )}
+        <p className="help-paragraph">
+          {proposalKryptonaMemberExecuted === true ? 'Member Proposal Executed' : 'Error Executing Member Proposal'}
+        </p>
+      </div> 
     </div>
     <h2 className="help-subtitle">Kryptona Treasury Proposal</h2>
     <div className='help-content'>

@@ -2,9 +2,10 @@ import React from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
-import Help from "./pages/Help";
+import Explore from "./pages/Explore";
 import Apply from "./pages/Apply";
 import Vote from "./pages/Vote";
+import Help from "./pages/Help";
 import "bootstrap/dist/css/bootstrap.css";
 import './App.css';
 import { WalletProvider, useWallet } from './WalletContext';
@@ -18,6 +19,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/apply" element={<Apply />} />
+        <Route path="/explore" element={<Explore />} />
         <Route path="/vote" element={<Vote />} />
         <Route path="/help" element={<Help />} />
       </Routes>

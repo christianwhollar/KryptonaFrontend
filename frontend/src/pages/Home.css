@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+
+.home {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: bold;
+    max-width: 1200px;
+    margin: auto;
+    color: #FFD700;
+}
+
+.header, .footer {
+    text-align: center;
+    padding: 20px;
+}
+
+.navigation ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.navigation ul li {
+    margin: 0 10px;
+}
+
+.navigation a {
+    text-decoration: none;
+    color: #FFD700; /* Gold text for navigation links */
+    font-weight: bold;
+}
+
+.home-content {
+    border: 5px solid #4B0082; /* Dark purple border */
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.home-content h2 {
+    margin-top: 0;
+}
+
+.footer {
+    color: #FFD700;
+    font-size: 16px;
+}
+
+.home-content h2 {
+    color: #FFD700;  /* Gold color for headings */
+    margin-bottom: 10px;
+}
+
+.home-content ul {
+    list-style-type: none; /* Removes default list styling */
+    padding: 0;
+}
+
+.home-content li {
+    margin-bottom: 10px; /* Space between list items */
+    border-left: 4px solid #4B0082; /* Dark purple line on the left */
+    padding-left: 10px; /* Spacing between the border and text */
+    font-size: 16px; /* Adjust font size as needed */
+}
+
+.home-content li strong {
+    color: #FFD700; /* Gold color for key terms */
+}

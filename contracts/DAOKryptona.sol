@@ -57,7 +57,7 @@ contract DAOKryptona is Ownable {
     // Modifier to restrict function calls to the proposal contract or the owner
     modifier onlyProposalContractOrOwner() {
         require(
-            msg.sender == proposalContract || msg.sender == owner(),
+            msg.sender == proposalContract || msg.sender == owner() || checkMembership(msg.sender),
             "Callable only by proposal contract or owner"
         );
         _;
