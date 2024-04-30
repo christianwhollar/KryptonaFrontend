@@ -3,12 +3,12 @@ import axios from 'axios';
 import './OrchestratorDemoDAO.css';
 
 const OrchestratorDemoDAO = () => {
-  // const [dataFileHash, setDataFileHash] = useState('Awaiting data file upload...');
-  // const [architectureFileHash, setArchitectureFileHash] = useState('Awaiting architecture file upload...');
-  // const [modelFileHash, setModelFileHash] = useState('Awaiting model file upload...');
-  const [dataFileHash, setDataFileHash] = useState('bafybeiesd4mzbkxoqo5bcmsts3yfnpckfbs3jqd5dycbs5gt6ezjvsfxga');
-  const [architectureFileHash, setArchitectureFileHash] = useState('bafkreiajlwvkxy5fpjmh7g65r3xhvkmrbhmjx7qnd2lvnm45nocfjudrba');
-  const [modelFileHash, setModelFileHash] = useState('bafkreifirvejhplfxelw7zz4j47z3kfokmukcbuiw3h5auomaq6ooqa4ka');
+  const [dataFileHash, setDataFileHash] = useState('Awaiting data file upload...');
+  const [architectureFileHash, setArchitectureFileHash] = useState('Awaiting architecture file upload...');
+  const [modelFileHash, setModelFileHash] = useState('Awaiting model file upload...');
+  // const [dataFileHash, setDataFileHash] = useState('bafybeiesd4mzbkxoqo5bcmsts3yfnpckfbs3jqd5dycbs5gt6ezjvsfxga');
+  // const [architectureFileHash, setArchitectureFileHash] = useState('bafkreiajlwvkxy5fpjmh7g65r3xhvkmrbhmjx7qnd2lvnm45nocfjudrba');
+  // const [modelFileHash, setModelFileHash] = useState('bafkreifirvejhplfxelw7zz4j47z3kfokmukcbuiw3h5auomaq6ooqa4ka');
   // Function to handle file upload
   const handleFileUpload = (event, setFileHash) => {
     const file = event.target.files[0];

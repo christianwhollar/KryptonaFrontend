@@ -25,6 +25,11 @@ contract DAOKryptona is Ownable {
         uint256 votingPower; // Voting power based on token holdings
     }
 
+    // Proposal structure to store proposal data
+    mapping(uint256 => address) public proposalContracts;
+    mapping(uint256 => string) public proposalTypes;
+    uint256 public proposalCount;
+
     // Mapping of addresses to member data
     mapping(address => Member) public members;
 
@@ -50,8 +55,53 @@ contract DAOKryptona is Ownable {
      * @dev Sets the proposal contract address.
      * @param _proposalContract The address of the proposal contract.
      */
-    function setProposalContract(address _proposalContract) public onlyOwner {
+    function _setProposalContract(address _proposalContract) public onlyOwner {
+        setProposalContract(_proposalContract, "");
+    }
+
+    /**
+     * @dev Sets the proposal contract address and type.
+     * @param _proposalContract Set the proposal contract address.
+     * @param _proposalType Set the proposal type.
+     */
+    function setProposalContract(address _proposalContract, string memory _proposalType) public onlyOwnerOrMember {
         proposalContract = _proposalContract;
+        proposalContracts[proposalCount] = _proposalContract;
+        proposalTypes[proposalCount] = _proposalType;
+        proposalCount++;
+    }
+    
+    /**
+     * @dev Retrieves the proposal contract address at a given index.
+     * @param _index The index of the proposal contract.
+     */
+    function getProposalContract(uint256 _index) public view returns (address) {
+        return proposalContracts[_index];
+    }
+
+    /**
+     * @dev Retrieves the number of proposals created.
+     * @return uint256 The number of proposals created.
+     */
+    function getProposalIndex() public view returns (uint256) {
+        return proposalCount;
+    }
+    
+    /**
+     * @dev Retrieves the proposal type at a given index.
+     * @param _index The index of the proposal type.
+     */
+    function getProposalType(uint256 _index) public view returns (string memory) {
+        return proposalTypes[_index];
+    }
+
+    // Modifier to restrict setting proposal contracts to the owner or member
+    modifier onlyOwnerOrMember() {
+        require(
+            msg.sender == owner() || checkMembership(msg.sender),
+            "Callable only by owner or member"
+        );
+        _;
     }
 
     // Modifier to restrict function calls to the proposal contract or the owner

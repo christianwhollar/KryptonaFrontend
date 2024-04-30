@@ -5,12 +5,14 @@ import './Explore.css';
 const Explore = () => (
   <div className="explore-container">
     <h1 className="explore-subtitle">Subsidiary DAOs</h1>
+    <div className='explore-content'>
     <Link to="/orchestrator-demo-dao" className="explore-button-container">
-      <button className="explore-button">Orchestrator Demo DAO</button>
+      <button className="explore-button">Orchestrator Demo</button>
     </Link>
     <Link to="/agent-demo-dao" className="explore-button-container">
-      <button className="explore-button">Agent Demo DAO</button>
+      <button className="explore-button">Agent Demo</button>
     </Link>
+    </div>
   </div>
 );
 

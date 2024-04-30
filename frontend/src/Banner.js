@@ -20,8 +20,9 @@ const Banner = () => {
             <div className="nav-links">
                 <a href="/">Home</a>
                 <a href="/apply">Apply</a>
-                <a href="/explore">Explore</a>
                 <a href="/vote">Vote</a>
+                <a href="/propose">Propose</a>
+                <a href="/explore">Explore</a>
                 <a href="/help">Help</a>
             </div>
             <button onClick={handleClick} className="wallet-button">

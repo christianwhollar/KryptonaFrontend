@@ -6,6 +6,7 @@ async function main() {
   execSync('npx hardhat run ./scripts/deploy_daokryptonatreasury.js --network localhost');
   execSync('npx hardhat run ./scripts/deploy_daokryptona.js --network localhost');
   execSync('npx hardhat run ./scripts/deploy_proposalkryptonamember.js --network localhost');
+  execSync('npx hardhat run ./scripts/deploy_proposalkryptonatreasury.js --network localhost');
   execSync('npx hardhat run ./scripts/evmAdvanceTimeWeek.js --network localhost');
 }
 

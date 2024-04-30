@@ -1,6 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
 
-.explore-subtitle {
+/* propose Page Container */
+.propose-container {
+  align-items: center;
+}
+
+.propose-subtitle {
     margin-top: 20px;
     margin-bottom: 20px;
     color: #FFD700;
@@ -9,23 +14,32 @@
   }
 
 /* Kryptona Token Section */
-.explore-container {
+.propose-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-top: 20px;
 }
 
-.explore-content {
+.propose-content {
     border: 5px solid #4B0082;
-    width: 600px;
+    width: 800px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
   }
+  
+.propose-input {
+    height: 30px; /* adjust as needed */
+    width: 90%; /* to make the textarea take the full width of its container */
+    padding: 10px;
+    font-size: 16px; /* adjust as needed */
+    margin-top:10px;
+    margin-bottom:10px;
+}
 
-.explore-button {
+.propose-button {
   padding: 10px;
   background-color: #32CD32;
   color: #F5F5F5;
@@ -41,7 +55,7 @@
   margin-top: 10px;
 }
 
-.explore-paragraph {
+.propose-paragraph {
     font-family: 'Orbitron', sans-serif;
     font-weight: bold;
     color: #FFD700;

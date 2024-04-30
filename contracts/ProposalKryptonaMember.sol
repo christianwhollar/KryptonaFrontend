@@ -58,14 +58,27 @@ contract ProposalKryptonaMember is ProposalBase {
     }
 
     /**
+     * @dev Retrieves the current vote count for a proposal.
+     * @param proposalId ID of the proposal to retrieve vote counts for.
+     * @return Votes in favor the proposal.
+     * @return Votes in opposition to the proposal.
+     */
+    function getVoteCount(uint256 proposalId) public view returns (uint256, uint256) {
+        Proposal storage p = proposals[proposalId];
+        return (p.forVotes, p.againstVotes);
+    }
+
+    /**
      * @dev Creates a proposal to add or remove a member from the DAO.
      * @param _member Address of the member to be added or removed.
      * @param _type Type of the member proposal (add or remove).
      */
     function createMemberProposal(address _member, ProposalType _type) public {
         // Ensure only DAO members can create a proposal
-        require(dao.checkMembership(msg.sender), "Only DAO members can propose");
-
+        require(
+            dao.checkMembership(msg.sender),
+            string(abi.encodePacked("Only DAO members can propose. Sender: ", toAsciiString(msg.sender)))
+        );
         // Generate a new proposal ID
         uint256 proposalId = nextProposalId;
         // Create the proposal with a descriptive message
@@ -95,5 +108,32 @@ contract ProposalKryptonaMember is ProposalBase {
             // Remove the member from the DAO
             dao.removeMember(mp.member);
         }
+    }
+
+    /**
+     * @dev Converts an address to an ASCII string.
+     * @param x The address to convert.
+     * @return string The ASCII string representation of the address.
+     */
+    function toAsciiString(address x) internal pure returns (string memory) {
+        bytes memory s = new bytes(40);
+        for (uint i = 0; i < 20; i++) {
+            bytes1 b = bytes1(uint8(uint(uint160(x)) / (2 ** (8 * (19 - i)))));
+            bytes1 hi = bytes1(uint8(b) / 16);
+            bytes1 lo = bytes1(uint8(b) - 16 * uint8(hi));
+            s[2 * i] = char(hi);
+            s[2 * i + 1] = char(lo);
+        }
+        return string(s);
+    }
+    
+    /**
+     * @dev Converts a byte to a character.
+     * @param b The byte to convert.
+     * @return c The character representation of the byte.
+     */
+    function char(bytes1 b) internal pure returns (bytes1 c) {
+        if (uint8(b) < 10) return bytes1(uint8(b) + 0x30);
+        else return bytes1(uint8(b) + 0x57);
     }
 }

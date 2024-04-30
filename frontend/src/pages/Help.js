@@ -123,16 +123,22 @@ const Help = () => {
     if (kryptonaDAOContract && walletAddress) {
       try {
         console.log('Elevating status...')
-        try {
-          await kryptonaDAOContract.adminAddMember(walletAddress);
-        } catch (error) {
-          console.log('Address is already a member:', error);
+        const memberStatusInitial = await kryptonaDAOContract.checkMembership(walletAddress);
+        if (memberStatusInitial === true) {
+          console.log('Address is already a member');
+          setKryptonaMemberStatus(memberStatusInitial.toString());
+          setStatusElevated(true);
+        } else {
+          try {
+            await kryptonaDAOContract.adminAddMember(walletAddress);
+          } catch (error) {
+            console.log('Error elevating member:', error);
+          }
+          const memberStatusFinal = await kryptonaDAOContract.checkMembership(walletAddress);
+          setKryptonaMemberStatus(memberStatusFinal.toString());
+          setStatusElevated(true);
+          console.log('Status Elevated');
         }
-        const memberStatus = await kryptonaDAOContract.checkMembership(walletAddress);
-        console.log(memberStatus)
-        setKryptonaMemberStatus(memberStatus.toString());
-        setStatusElevated(true);
-        console.log('Status Elevated');
       } catch (error) {
         console.error('Error elevating member:', error);
       }

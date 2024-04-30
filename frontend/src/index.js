@@ -5,6 +5,7 @@ import Home from "./pages/Home";
 import Explore from "./pages/Explore";
 import Apply from "./pages/Apply";
 import Vote from "./pages/Vote";
+import Propose from "./pages/Propose";
 import Help from "./pages/Help";
 import OrchestratorDemoDAO from "./pages/OrchestratorDemoDAO";
 import "bootstrap/dist/css/bootstrap.css";
@@ -20,8 +21,9 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/apply" element={<Apply />} />
-        <Route path="/explore" element={<Explore />} />
         <Route path="/vote" element={<Vote />} />
+        <Route path="/propose" element={<Propose />} />
+        <Route path="/explore" element={<Explore />} />
         <Route path="/help" element={<Help />} />
         <Route path="/orchestrator-demo-dao" element={<OrchestratorDemoDAO />} />
       </Routes>

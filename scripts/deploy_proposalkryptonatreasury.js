@@ -18,15 +18,15 @@ async function main() {
 
   const daoKryptonaAddress = getDAOKryptonaContractAddress();
 
-  const ProposalKryptonaMember = await ethers.getContractFactory("ProposalKryptonaMember");
-  const proposalKryptonaMember = await ProposalKryptonaMember.deploy(daoKryptonaAddress);
+  const ProposalKryptonaTreasury = await ethers.getContractFactory("ProposalKryptonaTreasury");
+  const proposalKryptonaTreasury = await ProposalKryptonaTreasury.deploy(daoKryptonaAddress);
 
-  await proposalKryptonaMember.deployed();
+  await proposalKryptonaTreasury.deployed();
 
-  console.log("Kryptona Member Proposal Address:", proposalKryptonaMember.address);
+  console.log("Kryptona Treasury Proposal Address:", proposalKryptonaTreasury.address);
 
   // Save the contract address and ABI for the frontend
-  saveFrontendFiles(proposalKryptonaMember, "ProposalKryptonaMember");
+  saveFrontendFiles(proposalKryptonaTreasury, "ProposalKryptonaTreasury");
 }
 
 main()
