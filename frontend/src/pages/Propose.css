@@ -1,7 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
 
-/* propose Page Container */
 .propose-container {
+  display: flex;
+  flex-direction: column;
   align-items: center;
 }
 
@@ -22,21 +23,18 @@
 }
 
 .propose-content {
-    border: 5px solid #4B0082;
-    width: 800px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-  
-.propose-input {
-    height: 30px; /* adjust as needed */
-    width: 90%; /* to make the textarea take the full width of its container */
-    padding: 10px;
-    font-size: 16px; /* adjust as needed */
-    margin-top:10px;
-    margin-bottom:10px;
+  border: 5px solid #4B0082;
+  width: 1200px;
+}
+
+.propose-button-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin-top: 20px;
+  margin-left: 20px;
+  margin-bottom: 20px;
 }
 
 .propose-button {
@@ -52,16 +50,83 @@
   width: 500px;
   text-align: center;
   margin-bottom: 10px;
-  margin-top: 10px;
+  margin-right: 15px;
+}
+
+.propose-button-two {
+  padding: 10px;
+  background-color: #32CD32;
+  color: #F5F5F5;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: 'Orbitron', sans-serif;
+  font-weight: bold;
+  align-items: center;
+  width: 500px;
+  text-align: center;
+  margin-bottom: 10px;
+  margin-right: 15px;
+  margin-left: 50px;
+}
+
+.propose-vote-approve-button {
+  padding: 10px;
+  background-color: #32CD32;
+  color: #F5F5F5;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: 'Orbitron', sans-serif;
+  font-weight: bold;
+  width: 300px;
+  text-align: center;
+  margin-left:225px;
+  margin-bottom: 10px;
+}
+
+.propose-vote-deny-button {
+  padding: 10px;
+  background-color: #32CD32;
+  color: #F5F5F5;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: 'Orbitron', sans-serif;
+  font-weight: bold;
+  align-items: right;
+  width: 300px;
+  text-align: center;
+  margin-left: 75px;
+  margin-bottom: 10px;
 }
 
 .propose-paragraph {
-    font-family: 'Orbitron', sans-serif;
-    font-weight: bold;
-    color: #FFD700;
-    margin: 0;
-    padding: 0;
-    width: 800px;
-    margin-top: 11px;
-    text-align: center;
-  }
+  font-family: 'Orbitron', sans-serif;
+  font-weight: bold;
+  color: #FFD700;
+  margin: 0;
+  padding: 0;
+  width: 800px;
+  margin-top: 11px;
+}
+
+.propose-paragraph-two {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: bold;
+  color: #FFD700;
+  margin: 0;
+  padding: 0;
+  margin-top: 11px;
+  margin-left:475px;
+}
+
+.propose-input {
+  margin: 0;
+  padding: 0;
+  width: 790px;
+  margin-top: 11px;
+  margin-right:10px;
+  font-family: 'Orbitron', sans-serif;
+  font-weight: bold;
+}
