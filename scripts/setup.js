@@ -3,6 +3,7 @@ const { execSync } = require('child_process');
 async function main() {
   execSync('npx hardhat run ./scripts/deploy_kryptona.js --network localhost');
   execSync('npx hardhat --network localhost faucet 0x8D48c4951114a719382422667C911f2876d6ebB7');
+  execSync('npx hardhat --network localhost faucet 0xBcd4042DE499D14e55001CcbB24a551F3b954096');
   execSync('npx hardhat run ./scripts/deploy_daokryptonatreasury.js --network localhost');
   execSync('npx hardhat run ./scripts/deploy_daokryptona.js --network localhost');
   execSync('npx hardhat run ./scripts/deploy_proposalkryptonamember.js --network localhost');

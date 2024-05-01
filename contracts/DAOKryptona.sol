@@ -193,6 +193,14 @@ contract DAOKryptona is Ownable {
     }
 
     /**
+     * @dev Retrieves the treasury's current ETH balance.
+     * @return The balance of ETH in the treasury.
+     */   
+    function getTreasuryBalance() public view returns (uint256) {
+        return address(kryptonaTreasury).balance;
+    }
+
+    /**
      * @dev Allows contributing Kryptona tokens to the treasury.
      * @param _amount Amount of Kryptona tokens to contribute.
      */

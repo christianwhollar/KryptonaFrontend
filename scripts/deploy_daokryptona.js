@@ -26,6 +26,12 @@ async function main() {
 
   console.log("DAO Treasury Address:", daoKryptona.address);
 
+  const amountToSend = ethers.utils.parseUnits("100", "ether");
+  await daoKryptona.connect(deployer).contributeToTreasuryETH({ value: amountToSend });
+
+  const treasuryBalance = await daoKryptona.getTreasuryBalance();
+  console.log("DAO Kryptona Treasury ETH Balance:", (treasuryBalance / 10**18).toString());
+
   // Save the contract address and ABI for the frontend
   saveFrontendFiles(daoKryptona, "DAOKryptona");
 }

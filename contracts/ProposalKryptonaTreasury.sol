@@ -60,6 +60,17 @@ contract ProposalKryptonaTreasury is ProposalBase {
     }
 
     /**
+     * @dev Retrieves the current vote count for a proposal.
+     * @param proposalId ID of the proposal to retrieve vote counts for.
+     * @return Votes in favor the proposal.
+     * @return Votes in opposition to the proposal.
+     */
+    function getVoteCount(uint256 proposalId) public view returns (uint256, uint256) {
+        Proposal storage p = proposals[proposalId];
+        return (p.forVotes, p.againstVotes);
+    }
+    
+    /**
      * @dev Creates a new proposal for transferring funds from the DAO treasury.
      * @param _to The recipient of the funds.
      * @param _amount The amount to be transferred.

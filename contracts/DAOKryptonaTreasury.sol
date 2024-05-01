@@ -22,7 +22,9 @@ contract DAOKryptonaTreasury is Ownable {
     }
 
     // Fallback function to allow the treasury to receive ETH directly without calling a function.
-    receive() external payable {}
+    receive() external payable {
+        depositETH();
+    }
 
     /**
      * @dev Allows depositing ETH into the treasury without the need for data (fallback).
