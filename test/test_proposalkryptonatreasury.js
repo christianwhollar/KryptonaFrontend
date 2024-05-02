@@ -1,3 +1,13 @@
+/**
+ * This is a test suite for the ProposalKryptonaTreasury contract.
+ * 
+ * The ProposalKryptonaTreasury contract is part of a DAO system, which allows members to propose and vote on proposals related to the treasury.
+ * 
+ * The test suite first sets up the necessary contracts and initial state in the beforeEach hook. This includes deploying the Kryptona token contract, minting some tokens, deploying the KryptonaTreasury contract, deploying the KryptonaDAO contract, and deploying the ProposalKryptonaTreasury contract.
+ * 
+ * The test suite then has a single test case that checks the functionality of sending ETH to the treasury and executing a proposal. The test case goes through the process of a member contributing ETH to the treasury, creating a proposal to send the ETH to another address, voting on the proposal, and then executing the proposal. The test case checks that the ETH was correctly transferred from the treasury to the specified address.
+ */
+
 const { expect } = require("chai");
 const { ethers } = require("hardhat");
 
